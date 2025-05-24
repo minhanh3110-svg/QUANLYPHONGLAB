@@ -69,7 +69,5 @@ def phong_caymo():
 
     return render_template("form_phong_caymo.html")
 
-
-    return render_template("form_phong_caymo.html")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
