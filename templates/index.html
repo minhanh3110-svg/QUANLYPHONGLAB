@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8"><title>Nhật ký cấy mô</title></head>
+<body>
+<h2>Nhập nhật ký</h2>
+<form method="POST">
+  <label>Nhân viên:</label>
+  <input name="staff" value="{{ staff }}"><br>
+  <label>Tình trạng:</label>
+  <select name="status">
+    <option value="Sạch">Sạch</option>
+    <option value="Khuẩn">Khuẩn</option>
+  </select><br>
+  <label>Thao tác:</label>
+  <select name="action">
+    <option value="Nhân">Nhân</option>
+    <option value="Giãn">Giãn</option>
+    <option value="Rễ">Rễ</option>
+  </select><br>
+  <button type="submit">Lưu</button>
+</form>
+</body>
+</html>

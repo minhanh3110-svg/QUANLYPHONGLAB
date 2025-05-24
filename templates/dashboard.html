@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Dashboard</title></head>
+<body>
+<h2>Dashboard</h2>
+<ul>
+  <li>Tổng cụm: {{ total_clusters }}</li>
+  <li>Tổng giờ: {{ total_hours }}</li>
+  <li>Năng suất TB: {{ avg_productivity }}</li>
+</ul>
+<h3>Top nhân viên</h3>
+<table border="1"><tr><th>Nhân viên</th><th>Tổng cụm</th><th>Tổng giờ</th><th>Năng suất TB</th></tr>
+{% for row in top_staff %}
+<tr><td>{{ row['staff'] }}</td><td>{{ row['total_clusters'] }}</td><td>{{ row['total_hours'] }}</td><td>{{ row['avg_productivity'] }}</td></tr>
+{% endfor %}
+</table>
+</body></html>

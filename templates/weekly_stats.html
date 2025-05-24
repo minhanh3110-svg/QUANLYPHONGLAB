@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Thống kê theo tuần</title></head>
+<body>
+<h2>Thống kê theo tuần</h2>
+<table border="1"><tr><th>Tuần</th><th>Nhân viên</th><th>Tổng cụm</th><th>Tổng giờ</th><th>Năng suất</th></tr>
+{% for row in stats %}
+<tr><td>{{ row['week'] }}</td><td>{{ row['staff'] }}</td><td>{{ row['total_clusters'] }}</td><td>{{ row['total_hours'] }}</td><td>{{ row['avg_productivity'] }}</td></tr>
+{% endfor %}
+</table>
+</body></html>
