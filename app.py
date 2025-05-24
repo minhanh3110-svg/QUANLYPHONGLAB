@@ -68,6 +68,84 @@ def phong_caymo():
         return redirect(url_for("phong_caymo"))
 
     return render_template("form_phong_caymo.html")
+# Trang chủ
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+# Đăng nhập
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = get_db_connection()
+        user = conn.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password)).fetchone()
+        conn.close()
+
+        if user:
+            session['username'] = username
+            return redirect(url_for('index'))
+        else:
+            return 'Sai tên đăng nhập hoặc mật khẩu'
+    return render_template('login.html')
+
+# Bắt buộc đăng nhập cho mọi route
+@app.before_request
+def require_login():
+    allowed_routes = ['login', 'static']
+    if request.endpoint not in allowed_routes and 'username' not in session:
+        return redirect(url_for('login'))
+
+# ===================== CÁC PHÒNG ========================
+
+@app.route('/phong-caymo', methods=['GET', 'POST'])
+def phong_caymo():
+    if request.method == 'POST':
+        ngay = request.form['ngay']
+        noi_dung = request.form['noi_dung']
+        nguoi_nhap = session['username']
+
+        conn = get_db_connection()
+        conn.execute("INSERT INTO caymo_logs (ngay, noi_dung, nguoi_nhap) VALUES (?, ?, ?)", (ngay, noi_dung, nguoi_nhap))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('phong_caymo'))
+    return render_template('phong_caymo.html')
+
+@app.route('/phong-sang', methods=['GET', 'POST'])
+def phong_sang():
+    if request.method == 'POST':
+        ngay = request.form['ngay']
+        noi_dung = request.form['noi_dung']
+        nguoi_nhap = session['username']
+
+        conn = get_db_connection()
+        conn.execute("INSERT INTO phongsang_logs (ngay, noi_dung, nguoi_nhap) VALUES (?, ?, ?)", (ngay, noi_dung, nguoi_nhap))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('phong_sang'))
+    return render_template('phong_sang.html')
+
+@app.route('/phong-moi-truong', methods=['GET', 'POST'])
+def phong_moitruong():
+    if request.method == 'POST':
+        ngay = request.form['ngay']
+        noi_dung = request.form['noi_dung']
+        nguoi_nhap = session['username']
+
+        conn = get_db_connection()
+        conn.execute("INSERT INTO moitruong_logs (ngay, noi_dung, nguoi_nhap) VALUES (?, ?, ?)", (ngay, noi_dung, nguoi_nhap))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('phong_moitruong'))
+    return render_template('phong_moitruong.html')
+
+# Đăng xuất
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
