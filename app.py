@@ -52,6 +52,26 @@ def chart():
 @app.route("/weekly_stats")
 def weekly_stats():
     return render_template("weekly_stats.html")
+    @app.route("/phong-caymo", methods=["GET", "POST"])
+def phong_caymo():
+    if request.method == "POST":
+        # xử lý dữ liệu tại đây
+        ten_mau = request.form.get("ten_mau")
+        so_luong = request.form.get("so_luong")
+        nguoi_nhap = session.get("username", "Ẩn danh")
 
+        # Ví dụ: lưu vào database (bạn cần thay phần này bằng hàm lưu thực tế)
+        conn = get_db_connection()
+        conn.execute(
+            "INSERT INTO log_entries (phong, ten_mau, so_luong, nguoi_nhap) VALUES (?, ?, ?, ?)",
+            ("phong_caymo", ten_mau, so_luong, nguoi_nhap)
+        )
+        conn.commit()
+        conn.close()
+
+        flash("Đã lưu thành công!", "success")
+        return redirect(url_for("phong_caymo"))
+
+    return render_template("form_phong_caymo.html")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
