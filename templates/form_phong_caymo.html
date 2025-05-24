@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Phòng Cấy Mô{% endblock %}
+{% block content %}
+<h3>Nhập liệu phòng cấy mô</h3>
+<form method="post">
+  <label>Tên mẫu</label>
+  <input name="tenmau" required>
+  <label>Ngày</label>
+  <input type="date" name="ngay" required>
+  <label>Số lượng mẫu</label>
+  <input name="soluong" type="number" required>
+  <button type="submit">Lưu</button>
+</form>
+{% endblock %}
