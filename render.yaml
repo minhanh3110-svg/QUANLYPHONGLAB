@@ -1,6 +1,6 @@
 services:
-  - type: web
-    name: lab-app
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+- type: web
+  name: lab-app
+  env: python
+  buildCommand: "pip install -r requirements.txt"
+  startCommand: "python app.py"
