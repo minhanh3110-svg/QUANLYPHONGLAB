@@ -1,1 +1,12 @@
 <h1>index</h1><a href="/phong-caymo">Phòng cấy mô</a> | <a href="/phong-sang">Phòng sáng</a> | <a href="/phong-moi-truong">Phòng môi trường</a>
+{% extends "base.html" %}
+{% block title %}Trang chủ{% endblock %}
+{% block content %}
+<h3>Xin chào {{ session['username'] }}</h3>
+<p>Chọn phòng để nhập dữ liệu:</p>
+<ul>
+    <li><a href="/phong-caymo">Phòng cấy mô</a></li>
+    <li><a href="/phong-sang">Phòng sáng</a></li>
+    <li><a href="/phong-moi-truong">Phòng môi trường</a></li>
+</ul>
+{% endblock %}
